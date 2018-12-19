@@ -1,0 +1,13 @@
+<section fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="30px">
+  <div fxFlex>
+    <p>500 Server Error</p>
+    <p>We are sorry for the inconvinience, plese report this error.</p>
+  </div>
+  <div fxFlex class="text-center">
+    <mat-checkbox (change)="checkChanged($event)" color="primary">I want to report this error.</mat-checkbox>
+  </div>
+  <div fxFlex *ngIf="reportedError" class="text-center mat-spinner">
+      <mat-progress-spinner mode="determinate" [value]="errorPercentage" class="text-center"></mat-progress-spinner>
+      <h2>{{errorPercentage}}%</h2>
+  </div>
+</section>

@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-server-error',
+  templateUrl: './server-error.component.html',
+  styleUrls: ['./server-error.component.scss']
 })
-export class AppComponent {
-  title = 'ang-material-owneraccount';
+export class ServerErrorComponent implements OnInit {
+
   public reportedError: boolean;
   public errorPercentage = 0;
   public timer;
 
   constructor() { }
+
+  ngOnInit() {
+  }
 
   public checkChanged = (event) => {
     this.reportedError = event.checked;
@@ -33,4 +36,5 @@ export class AppComponent {
     clearInterval(this.timer);
     this.errorPercentage = 0;
   }
+
 }

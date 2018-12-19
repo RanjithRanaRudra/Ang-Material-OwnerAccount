@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { ErrorHandlerService } from './../../shared/error-handler.service';
 import { RepositoryService } from './../../shared/repository.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
@@ -16,7 +18,7 @@ export class OwnerListComponent implements OnInit, AfterViewInit {
 ];
   public dataSource = new MatTableDataSource<Owner>();
 
-  constructor(private repoService: RepositoryService) { }
+  constructor(private repoService: RepositoryService, private errorservice: ErrorHandlerService, private router: Router) { }
 
   ngOnInit() {
     this.getAllOwners();
@@ -31,19 +33,64 @@ export class OwnerListComponent implements OnInit, AfterViewInit {
     /* this.repoService.getData('api/owner')
     .subscribe(res => {
       this.dataSource.data = res as Owner[];
+    }, (error) => {
+      this.errorservice.handleError(error);
     }); */
     this.dataSource.data = [
-      {'id': '1', 'address': '27 Colored Row', 'dateOfBirth': new Date('Nov 14, 1994') , 'name': 'Anna Bosh'},
-      {'id': '2', 'address': 'Congress Avenue 56', 'dateOfBirth': new Date('Apr 19, 2000') , 'name': 'Daniel Batista'},
-      {'id': '3', 'address': 'Dave\'s Street 23', 'dateOfBirth': new Date('Mar 29, 2009') , 'name': 'Dave'},
-      {'id': '4', 'address': '61 Wellfield Road', 'dateOfBirth': new Date('Dec 30, 1980') , 'name': 'John Keen'},
-      {'id': '5', 'address': '3 Edgar Buildings', 'dateOfBirth': new Date('May 21, 1983') , 'name': 'Martin Miller'},
-      {'id': '6', 'address': '91 Westren roads', 'dateOfBirth': new Date('Apr 22, 1990') , 'name': 'Sam Query'},
+      {'id': '1', 'address': '27 Colored Row', 'dateOfBirth': new Date('Nov 14, 1994') , 'name': 'Anna Bosh', 'accounts':
+        {
+          id: '1',
+          dateCreated: new Date(),
+          accountType: 'string',
+          ownerId: 'string'
+        }
+      },
+      {'id': '2', 'address': 'Congress Avenue 56', 'dateOfBirth': new Date('Apr 19, 2000') , 'name': 'Daniel Batista', 'accounts':
+      {
+        id: '1',
+        dateCreated: new Date(),
+        accountType: 'string',
+        ownerId: 'string'
+      }
+    },
+      {'id': '3', 'address': 'Dave\'s Street 23', 'dateOfBirth': new Date('Mar 29, 2009') , 'name': 'Dave', 'accounts':
+        {
+          id: '1',
+          dateCreated: new Date(),
+          accountType: 'string',
+          ownerId: 'string'
+        }
+      },
+      {'id': '4', 'address' : '61 Wellfield Road', 'dateOfBirth' : new Date('Dec 30, 1980') , 'name' : 'John Keen', 'accounts' :
+        {
+          id: '1',
+          dateCreated : new Date(),
+          accountType : 'string',
+          ownerId : 'string'
+        }
+      },
+      {'id' : '5', 'address' : '3 Edgar Buildings', 'dateOfBirth' : new Date('May 21, 1983') , 'name' : 'Martin Miller', 'accounts' :
+        {
+          id: '1',
+          dateCreated : new Date(),
+          accountType : 'string',
+          ownerId : 'string'
+        }
+      },
+      {'id' : '6', 'address' : '91 Westren roads', 'dateOfBirth' : new Date('Apr 22, 1990') , 'name' : 'Sam Query', 'accounts' :
+        {
+          id: '1',
+          dateCreated : new Date(),
+          accountType : 'string',
+          ownerId : 'string'
+        }
+      },
     ];
   }
 
   public redirectToDetails = (id: string) => {
-
+    const url = `/owner/details/${id}`;
+    this.router.navigate([url]);
   }
 
   public redirectToUpdate = (id: string) => {
